@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Bootstrap Theme for Developers</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <!-- right-weather -->
+    <link rel="stylesheet" type="text/css" href="right-weather.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/weather.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>   
+    <script type="text/javascript" src="assets/plugins/jquery.easing.1.3.js"></script>   
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>     
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script> 
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/js/main.js"></script>  
+<script>
+$(document).ready(function(){
+  	/*jQuery ajax的post方法
+  	 *语法：$.post(URL,data,callback);
+  	 *学习：http://www.w3school.com.cn/jquery/jquery_ajax_get_post.asp
+  	 */
+    $.post("http://api.jirengu.com/weather.php?city=suzhou",
+    function(data){//data就是API返回的JSON串
+    /*js的Json串解析：
+     *使用JSON。parse()
+     *学习： http://blog.csdn.net/lowkeysk/article/details/8175195
+     */
+    	var obj = JSON.parse(data);
+    	var weatherData = obj.results[0].weather_data[0];
+    	for(var i=0; i<4; i++){
+    		weatherData = obj.results[0].weather_data[i];
+    		document.getElementById("date"+i).innerHTML = weatherData.date.substring(0,2) ;			//写入日期
+    		document.getElementById("imgDay"+i).src = weatherData.dayPictureUrl;	//写入日间天气图片链接
+    		document.getElementById("imgNight"+i).src = weatherData.nightPictureUrl;//写入晚间天气图片链接
+    		document.getElementById("temperature"+i).innerHTML = weatherData.temperature;//写入气温信息
+    	}				
+    });
+    $.parser.parse();	
+
+});
+</script>
+</head>
+<body data-spy="scroll">
+	
+    <!-- ******HEADER****** --> 
+    <header id="header" class="header">  
+        <div class="container">            
+            <h1 class="logo pull-left">
+                <a class="scrollto" href="#promo">
+                    <span class="logo-title">Logo</span>
+                </a>
+            </h1><!--//logo-->
+            <!-- 顶部天气结束 -->
+        </div>
+        
+    </header><!--//header-->
+    <section id="news" class="about section">
+        <div class="container">
+            <h2 class="title text-center"><a href="news">新闻</a></h2>
+           <!--  <div class="item" style="border: 1px solid ;"> -->
+                    <div class="weather text-center">
+                    	<div class="row list">
+                    		<div class="col-xs-3 date">周一</div>
+                    		<div class="col-xs-5">
+                    			<img src="http://api.map.baidu.com/images/weather/day/duoyun.png">
+                    			<img src="http://api.map.baidu.com/images/weather/night/qing.png">
+                    		</div>
+                    		<div class="col-xs-4" style="padding: 0 px;">13 ~ 5℃</div>
+                    		
+                    	</div>
+                    	<div class="row list single">
+                    		<div class="col-xs-3 date" id="date0"></div>
+                    		<div class="col-xs-5" id="weatherImg0">
+                    			<img id="imgDay0">
+                    			<img id="imgNight0">
+                    		</div>
+                    		<div class="col-xs-4" id="temperature0"></div>
+                    	</div>
+                    	<div class="row list">
+                    		<div class="col-xs-3 date" id="date1"></div>
+                    		<div class="col-xs-5" id="weatherImg1">
+                    			<img id="imgDay1">
+                    			<img id="imgNight1">
+                    		</div>
+                    		<div class="col-xs-4 " id="temperature1"></div>
+                    	</div>
+                    	<div class="row list single">
+                    		<div class="col-xs-3 date" id="date2"></div>
+                    		<div class="col-xs-5" id="weatherImg2">
+                    			<img id="imgDay2">
+                    			<img id="imgNight2">
+                    		</div>
+                    		<div class="col-xs-4" id="temperature2"></div>
+                    	</div>
+                    	<div class="row list">
+                    		<div class="col-xs-3 date" id="date3"></div>
+                    		<div class="col-xs-5" id="weatherImg3">
+                    			<img id="imgDay3">
+                    			<img id="imgNight3">
+                    		</div>
+                    		<div class="col-xs-4" id="temperature3"></div>
+                    	</div>
+            <!-- </div>//item     -->        
+        </div><!--//container-->
+    </section><!--//about-->
+
+</body>
+</html>
